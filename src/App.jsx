@@ -9,6 +9,7 @@ function App() {
       <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       <section className='flex w-full border-l border-l-grey-light-1'>
         <Sidebar showSidebar={showSidebar} />
+        
         <Project />
       </section>
     </div>
