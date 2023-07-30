@@ -1,49 +1,48 @@
 import React, { useState } from 'react'
-import { Logo } from '../static/img';
-import { AddSquare2, ArrowLeft, Home, Message2, Profile, Lamp, Setting, Task, Dots } from '../static/icon';
+import { AddSquare2, Home, Message2, Profile, Lamp, Setting, Task, Dots } from '../static/icon';
 import { dummyProjects } from "../data/KanbanData";
 
 import { Bullet } from "./ui/Bullet";
 
-const Sidebar = ({ children, header, showSidebar, setShowSidebar }) => {
-    const [projects, setProjects] = useState(dummyProjects);
+const sideBarItems= [
+    {
+        title:"Home",
+        src:Home
+    },
+    {
+        title:"Messages",
+        src:Message2
+    },
+    {
+        title:"Tasks",
+        src:Task
+    },
+    {
+        title:"Members",
+        src:Profile
+    },
+    {
+        title:"Settings",
+        src:Setting
+    },
+]
+
+const Sidebar = ({ showSidebar }) => {
+    const projects=dummyProjects;
     const [currentProject, setCurrentProject] = useState(dummyProjects[0]);
 
     return (
-        <div>
-            <div className={`sticky top-0 min-h-screen ${showSidebar ? 'w-64' : 'hidden'}`}>
-                {/* <header className='h-20 border-b border-b-grey-light-1 flex justify-between items-center px-[13px] sm:px-4'>
-                <span className='flex text-xl font-semibold text-black gap-[9px]'>
-                    <img src={Logo} alt='Logo' className='aspect-square object-contain' />
-                    <h2 className="hidden sm:block">Project M.</h2>
-                </span>
-                <button className='hidden sm:inline-flex'>
-                    <img src={ArrowLeft} alt={ArrowLeft} />
-                </button>
-            </header> */}
+            <div className={`sticky top-0 min-h-screen ${showSidebar ? 'w-64 border-r' : 'hidden'}`}>
+                
                 <main>
                     {/* Navbar */}
-                    <ul className='my-0 mx-[13px] py-[30px] px-0 flex flex-col gap-[25px] border-b border-b-grey-light-1'>
-                        <li className='flex text-base font-medium text-grey gap-[14px] sm:ml-[9px] cursor-pointer'>
-                            <img src={Home} alt={Home} />
-                            <span className="hidden sm:block">Home</span>
-                        </li>
-                        <li className='flex text-base font-medium text-grey gap-[14px] sm:ml-[9px] cursor-pointer'>
-                            <img src={Message2} alt={Message2} />
-                            <span className="hidden sm:block">Messages</span>
-                        </li>
-                        <li className='flex text-base font-medium text-grey gap-[14px] sm:ml-[9px] cursor-pointer'>
-                            <img src={Task} alt={Task} />
-                            <span className="hidden sm:block">Tasks</span>
-                        </li>
-                        <li className='flex text-base font-medium text-grey gap-[14px] sm:ml-[9px] cursor-pointer'>
-                            <img src={Profile} alt={Profile} />
-                            <span className="hidden sm:block">Members</span>
-                        </li>
-                        <li className='flex text-base font-medium text-grey gap-[14px] sm:ml-[9px] cursor-pointer'>
-                            <img src={Setting} alt={Setting} />
-                            <span className="hidden sm:block">Settings</span>
-                        </li>
+                    <ul className='my-0 mx-[13px] py-[30px] px-0 flex flex-col gap-[15px] border-b border-b-grey-light-1'>
+                        {sideBarItems.map(sideBarItem => (
+                            <li className='flex px-2 text-base font-medium text-grey gap-[14px] sm:ml-[9px] cursor-pointer hover:bg-blue hover:bg-opacity-[0.08] rounded-[6px]'>
+                                <img className='py-2' src={sideBarItem.src} alt={sideBarItem.src} />
+                                <span className="hidden sm:block py-2">{sideBarItem.title}</span>
+                            </li>
+                        ))}
                     </ul>
 
                     {/* MyProjects */}
@@ -52,15 +51,16 @@ const Sidebar = ({ children, header, showSidebar, setShowSidebar }) => {
                             <span className='text-xs font-bold text-grey uppercase'>MY PROJECTS</span>
                             <span className='cursor-pointer'><img src={AddSquare2} alt={AddSquare2} /></span>
                         </header>
-                        <div className='hidden sm:flex flex-col gap-[10px] w-[14.0625rem] h-'>
-                            {projects.map((project) => (
+                        <div className='hidden sm:flex flex-col gap-[10px] w-[14.0625rem]'>
+                            {projects.map((project,index) => (
                                 <button key={project.id}
+                                onClick={() => setCurrentProject(projects[index])}
                                     className={`inline-flex justify-between px-3 items-center h-[2.4375rem] hover:bg-blue hover:bg-opacity-[0.08] rounded-[6px] cursor-pointer ${project.id === currentProject.id && 'bg-blue bg-opacity-[0.08]'
                                         }`}
                                 >
                                     <span className='inline-flex gap-4 items-center'>
                                         <Bullet color={project.favColor} />
-                                        <span className='text-sm font-medium text-grey'>{project.name}</span>
+                                        <span className={`text-sm font-medium ${project.id===currentProject.id ? 'text-pure-black font-semibold':'text-grey'}`}>{project.name}</span>
                                     </span>
                                     {project.id === currentProject.id && (
                                         <span className=''>
@@ -91,7 +91,6 @@ const Sidebar = ({ children, header, showSidebar, setShowSidebar }) => {
                     </div>
                 </main>
             </div>
-        </div>
     )
 }
 

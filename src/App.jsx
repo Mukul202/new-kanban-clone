@@ -8,7 +8,7 @@ function App() {
     <div className='w-full scrollbar-hide'>
       <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       <section className='flex w-full border-l border-l-grey-light-1'>
-        <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+        <Sidebar showSidebar={showSidebar} />
         <Project />
       </section>
     </div>

@@ -10,6 +10,13 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { dummyProjects } from "../data/KanbanData";
 import TodosList from "./todos/TodosList";
 
+const users={
+    User1,
+    User2,
+    User3,
+    User4
+}
+
 const Project = () => {
     const [notStartedTodos, setNotStartedTodos] = useState(
         dummyProjects[0].toDos.filter((todo) => todo.status === "not started")
@@ -85,13 +92,15 @@ const Project = () => {
                         <span className='font-[1rem] text-blue'>Invite</span>
                     </button>
                     <div className="flex -space-x-2">
-                        <img className="w-[38px] aspect-square border border-white rounded-full" src={User1} alt={User1} />
-                        <img className="w-[38px] aspect-square border border-white rounded-full" src={User2} alt={User2} />
-                        <img className="w-[38px] aspect-square border border-white rounded-full" src={User3} alt={User3} />
-                        <img className="w-[38px] aspect-square border border-white rounded-full" src={User4} alt={User4} />
+                        {
+                            Object.keys(users).map((user,index) => {
+                                return (
+                                    <img key={index} className="w-[38px] aspect-square border border-white rounded-full" src={users[user]} alt={user} />
+                                )
+                            })
+                        }
                         <a className="flex items-center justify-center w-10 h-10 text-[#D25B68] bg-[#F4D7DA] border border-white rounded-full font-[0.9375rem]">+2</a>
                     </div>
-                    {/* <Users users={["User1", "User4", "User3", "User2", "User5", "User6"]} width="38px" height="38px" overlap="left" offset="8" /> */}
                 </div>
             </div>
 

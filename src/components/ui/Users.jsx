@@ -6,11 +6,11 @@ export default function Users({ users, width, height, offset, overlap }) {
   const count = users.length > 4 ? users.length - 4 : 0;
 
   const usersObj = {
-    User1: User1,
-    User2: User2,
-    User3: User3,
-    User4: User4,
-    User5: User5,
+    User1,
+    User2,
+    User3,
+    User4,
+    User5,
   };
 
   return (
@@ -39,7 +39,7 @@ export default function Users({ users, width, height, offset, overlap }) {
         );
       })}
       {count !== 0 && (
-        <span className='flex justify-center items-center bg-[#F4D7DA] border border-white rounded-full text-red text-[15px] font-medium z-40' style={{ width: width, height: height }}>
+        <span className='flex justify-center items-center bg-[#F4D7DA] border border-white rounded-full text-red text-[15px] font-medium z-40' style={{ width, height }}>
           +{count}
         </span>
       )}

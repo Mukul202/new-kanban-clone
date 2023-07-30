@@ -13,6 +13,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
 
     return (
         <div className='z-50 flex justify-between items-center h-20 w-full border-b border-b-grey-light-1'>
+            <span className={`${showSidebar?'absolute z-100 ml-64 h-full border-r':'' }`} />
             <div className={`px-4 flex justify-between items-center h-20 ${showSidebar ? 'w-64' : 'w-[3.625rem]'}`}>
                 {showSidebar ?
                     <div className='flex text-xl font-semibold text-black gap-[9px]'>
